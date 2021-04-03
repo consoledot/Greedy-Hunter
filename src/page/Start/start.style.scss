@@ -1,0 +1,72 @@
+.start {
+  background-color: #43144a;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  section {
+    margin: 5rem auto;
+    max-width: 100%;
+    display: flex;
+    height: fit-content;
+    // border: 1px solid red;
+    height: 80%;
+    .image {
+      overflow: hidden;
+      height: 100%;
+      img {
+        height: 100%;
+      }
+    }
+    .info-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      & > * {
+        margin-bottom: 1.5rem;
+      }
+      h3 {
+        color: #ffc700;
+        font-weight: 600;
+        font-size: 64px;
+        width: 455px;
+        text-align: center;
+        line-height: 77px;
+      }
+      .instruction {
+        color: #cbcbff;
+        font-size: 24px;
+        width: 485px;
+        text-align: center;
+        line-height: 29px;
+      }
+      .select {
+        display: flex;
+        color: #ee8d94;
+        gap: 10px;
+        p {
+          font-size: 36px;
+        }
+        input {
+          width: 80px;
+          border-color: #ee8d94;
+          color: #ee8d94;
+          font-weight: 300;
+          font-size: 20px;
+          border-radius: 5px;
+          outline: #ee8d94;
+        }
+      }
+      button {
+        background-color: #853594;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        width: 248px;
+        height: 64px;
+        font-size: 34px;
+        cursor: pointer;
+      }
+    }
+  }
+}
