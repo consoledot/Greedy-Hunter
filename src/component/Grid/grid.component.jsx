@@ -1,8 +1,6 @@
 import "./grid.style.scss";
+import { Food } from "../../assets";
 
-const Grid = (props) => {
-  console.log(props);
-  return <div className="grid"></div>;
-};
+const Grid = ({ value }) => <div className="grid">{value && <Food />}</div>;
 
 export default Grid;
