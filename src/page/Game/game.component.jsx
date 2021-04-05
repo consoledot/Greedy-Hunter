@@ -2,8 +2,9 @@ import "./game.style.scss";
 import { background } from "../../assets";
 import Grids from "../../component/Grid Cards/grid-cards.component";
 import { Life } from "../../assets";
+import { connect } from "react-redux";
 
-const Game = () => (
+const Game = ({ grid }) => (
   <div
     className="game"
     style={{
@@ -14,17 +15,19 @@ const Game = () => (
   >
     <div className="board">
       <div className="top">
-        <p>Grid 10 x 10</p>
+        <p>{`Grid ${grid} x ${grid}`}</p>
         <Life />
-        <p>Time Spent: 00:48s</p>
+        <p>Time Spent: 00:00s</p>
       </div>
-      <Grids grid={5} />
+      <Grids grid={grid} />
       <div className="bottom">
-        <p>Maximum moves: 100</p>
+        <p>Maximum moves: {Math.ceil((grid * grid) / 2)}</p>
         <p>Total moves: 12</p>
       </div>
     </div>
   </div>
 );
-
-export default Game;
+const mapStateToProps = (state) => ({
+  grid: state.grid,
+});
+export default connect(mapStateToProps)(Game);
