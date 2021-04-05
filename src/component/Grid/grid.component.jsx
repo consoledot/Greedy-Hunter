@@ -1,6 +1,11 @@
 import "./grid.style.scss";
 import { Food } from "../../assets";
-
-const Grid = ({ value }) => <div className="grid">{value && <Food />}</div>;
+import { Monster } from "../../assets/";
+const Grid = ({ value, monster }) => (
+  <div className="grid">
+    {value && <Food />}
+    {monster && <Monster className="monster" />}
+  </div>
+);
 
 export default Grid;
