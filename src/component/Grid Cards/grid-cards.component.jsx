@@ -1,5 +1,4 @@
 import "./grid-cards.style.scss";
-import { useEffect } from "react";
 import Grid from "../Grid/grid.component";
 
 const Grids = ({ grid }) => {
@@ -17,7 +16,6 @@ const Grids = ({ grid }) => {
   for (let i = 0; i < grid; i++) {
     generateRandomNumber(gridSquare, randomArray, randomNumber);
   }
-  console.log(randomArray);
   const list = randomArray.entries();
   const emptyArray = [];
   for (let li of list) {
@@ -32,7 +30,6 @@ const Grids = ({ grid }) => {
     }
     return setMonster(num, array);
   }
-  console.log(setMonster(gridSquare, emptyArray));
   const monsterNumber = setMonster(gridSquare, emptyArray);
   return (
     <div
