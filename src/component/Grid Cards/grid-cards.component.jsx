@@ -12,8 +12,7 @@ const Grids = ({ grid, fruitsArray, monsterIndex }) => {
         gridTemplateRows: `repeat(${grid}, 1fr)`,
       }}
     >
-      {[...Array(grid * grid).keys()].map((grid, i) => {
-        Math.random();
+      {[...Array(grid * grid).keys()].map((_, i) => {
         return (
           <Grid
             key={i}

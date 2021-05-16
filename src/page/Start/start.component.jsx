@@ -26,7 +26,7 @@ const Start = ({ setGrid, setMonsterIndex, setFruitsArray }) => {
 
   //Game utilities
   const startGame = async () => {
-    let randomNumber = 0;
+    let randomNumber = null;
     const gridSquare = grid * grid;
     const fruitsArray = new Array(gridSquare);
     function generateRandomNumber(num, array, prev) {
@@ -57,10 +57,7 @@ const Start = ({ setGrid, setMonsterIndex, setFruitsArray }) => {
     const monsterIndex = await setMonster(gridSquare, emptyArray);
 
     setGrid(grid);
-    console.log("Empty", emptyArray);
-    console.log("Fruits", fruitsArray);
     setFruitsArray(fruitsArray);
-    console.log("monsterIndex", monsterIndex);
     setMonsterIndex(monsterIndex);
     history.push("/game");
   };

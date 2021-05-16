@@ -9,7 +9,13 @@ function App({ monsterIndex }) {
         <Route path="/" exact component={Start} />
         <Route
           path="/game"
-          render={() => (monsterIndex ? <Game /> : <Redirect to="/" />)}
+          render={() =>
+            !isNaN(monsterIndex) && monsterIndex !== null ? (
+              <Game />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
         />
       </Switch>
     </div>

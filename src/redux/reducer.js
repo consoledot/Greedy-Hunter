@@ -2,6 +2,7 @@ const INITIAL_STATE = {
   grid: null,
   monsterIndex: null,
   fruitsArray: null,
+  movements: [],
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,12 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         monsterIndex: action.payload,
+        movements: [
+          parseInt(action.payload) - parseInt(state.grid),
+          action.payload - 1,
+          action.payload + 1,
+          parseInt(action.payload) + parseInt(state.grid),
+        ],
       };
     case "SET_FRUITS":
       return {
