@@ -4,7 +4,7 @@ import Grids from "../../component/Grid Cards/grid-cards.component";
 import { Life } from "../../assets";
 import { connect } from "react-redux";
 
-const Game = ({ grid }) => (
+const Game = ({ grid, movesCount }) => (
   <div
     className="game"
     style={{
@@ -22,12 +22,13 @@ const Game = ({ grid }) => (
       <Grids grid={grid} />
       <div className="bottom">
         <p>Maximum moves: {Math.ceil((grid * grid) / 2)}</p>
-        <p>Total moves: 0</p>
+        <p>Total moves: {movesCount}</p>
       </div>
     </div>
   </div>
 );
 const mapStateToProps = (state) => ({
   grid: state.grid,
+  movesCount: state.movesCount,
 });
 export default connect(mapStateToProps)(Game);

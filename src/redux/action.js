@@ -10,3 +10,7 @@ export const setFruitsArray = (array) => ({
   type: "SET_FRUITS",
   payload: array,
 });
+export const setRemoveFruit = (index) => ({
+  type: "SET_REMOVE_FRUIT",
+  payload: index,
+});

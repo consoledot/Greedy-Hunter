@@ -1,8 +1,11 @@
+import { setMovements, updateFruits } from "./utils";
 const INITIAL_STATE = {
   grid: null,
   monsterIndex: null,
   fruitsArray: null,
   movements: [],
+  movesCount: -1,
+  removeFruit: null,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -16,17 +19,18 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         monsterIndex: action.payload,
-        movements: [
-          parseInt(action.payload) - parseInt(state.grid),
-          action.payload - 1,
-          action.payload + 1,
-          parseInt(action.payload) + parseInt(state.grid),
-        ],
+        movements: setMovements(action.payload, state.grid),
+        movesCount: state.movesCount + 1,
       };
     case "SET_FRUITS":
       return {
         ...state,
         fruitsArray: action.payload,
+      };
+    case "SET_REMOVE_FRUIT":
+      return {
+        ...state,
+        removeFruit: updateFruits(state.fruitsArray, action.payload),
       };
     default:
       return state;
