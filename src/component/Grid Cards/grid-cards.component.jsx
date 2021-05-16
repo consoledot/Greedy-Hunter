@@ -17,7 +17,7 @@ const Grids = ({ grid, fruitsArray, monsterIndex }) => {
           <Grid
             key={i}
             index={i}
-            value={fruitsArray[i] === 1 ? true : false}
+            value={fruitsArray[i] ? true : false}
             monster={monsterIndex === i ? true : false}
           />
         );
