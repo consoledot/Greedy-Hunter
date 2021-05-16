@@ -42,7 +42,7 @@ const Start = ({ setGrid, setMonsterIndex, setFruitsArray }) => {
       if (array.includes(random)) {
         return random;
       }
-      return setMonster(num, emptyArray);
+      return setMonster(num, array);
     };
     for (let i = 0; i < grid; i++) {
       await generateRandomNumber(gridSquare, fruitsArray, randomNumber);
