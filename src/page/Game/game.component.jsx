@@ -22,7 +22,7 @@ const Game = ({ grid }) => (
       <Grids grid={grid} />
       <div className="bottom">
         <p>Maximum moves: {Math.ceil((grid * grid) / 2)}</p>
-        <p>Total moves: 12</p>
+        <p>Total moves: 0</p>
       </div>
     </div>
   </div>

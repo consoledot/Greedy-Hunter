@@ -3,26 +3,68 @@ import { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { dotted, character } from "../../assets";
 import { connect } from "react-redux";
-import { setGrid } from "../../redux/action";
+import { setGrid, setMonsterIndex, setFruitsArray } from "../../redux/action";
 
-const Start = ({ setGrid }) => {
+const Start = ({ setGrid, setMonsterIndex, setFruitsArray }) => {
   const button = useRef();
   const history = useHistory();
   const [error, setError] = useState(true);
   const [grid, setGridNum] = useState("");
+
   const handleGridUpdate = (e) => {
     const { value } = e.target;
-    if (value > 10 || value <= 0) {
-      setError(true);
-      button.current.disabled = true;
-    } else {
+    if (value >= 5 && value <= 12) {
       setError(false);
       button.current.disabled = false;
       setGridNum(value);
+    } else {
+      setError(true);
+      button.current.disabled = true;
+      console.log(value);
     }
-
-    console.log(value);
   };
+
+  //Game utilities
+  const startGame = async () => {
+    let randomNumber = 0;
+    const gridSquare = grid * grid;
+    const fruitsArray = new Array(gridSquare);
+    function generateRandomNumber(num, array, prev) {
+      const random = Math.floor(Math.random() * num);
+      if (random !== prev) {
+        prev = random;
+        return (array[random] = 1);
+      }
+      return generateRandomNumber(num, array, prev);
+    }
+    const setMonster = (num, array) => {
+      const random = Math.floor(Math.random() * num);
+      if (array.includes(random)) {
+        return random;
+      }
+      return setMonster(num, emptyArray);
+    };
+    for (let i = 0; i < grid; i++) {
+      await generateRandomNumber(gridSquare, fruitsArray, randomNumber);
+    }
+    const list = fruitsArray.entries();
+    const emptyArray = [];
+    for (let li of list) {
+      if (li[1] === undefined) {
+        emptyArray.push(li[0]);
+      }
+    }
+    const monsterIndex = await setMonster(gridSquare, emptyArray);
+
+    setGrid(grid);
+    console.log("Empty", emptyArray);
+    console.log("Fruits", fruitsArray);
+    setFruitsArray(fruitsArray);
+    console.log("monsterIndex", monsterIndex);
+    setMonsterIndex(monsterIndex);
+    history.push("/game");
+  };
+
   return (
     <div className="start">
       <section>
@@ -42,7 +84,7 @@ const Start = ({ setGrid }) => {
           </div>
           <div className="select">
             <p>Game Grid</p>
-            <input type="number" min="0" max="10" onChange={handleGridUpdate} />
+            <input type="number" min="5" max="12" onChange={handleGridUpdate} />
           </div>
           <p
             className="error"
@@ -51,13 +93,12 @@ const Start = ({ setGrid }) => {
             }}
           >
             {" "}
-            Grid must be less than or equal to 10
+            Grid must be between a value between 5 and 12
           </p>
           <button
             ref={button}
             onClick={() => {
-              setGrid(grid);
-              history.push("/game");
+              startGame();
             }}
             disabled={error ? true : false}
           >
@@ -71,5 +112,7 @@ const Start = ({ setGrid }) => {
 };
 const mapDispatchToProps = (dispatch) => ({
   setGrid: (number) => dispatch(setGrid(number)),
+  setFruitsArray: (array) => dispatch(setFruitsArray(array)),
+  setMonsterIndex: (number) => dispatch(setMonsterIndex(number)),
 });
 export default connect(null, mapDispatchToProps)(Start);
