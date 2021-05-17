@@ -5,7 +5,7 @@ import { dotted, character } from "../../assets";
 import { connect } from "react-redux";
 import { setGrid, setMonsterIndex, setFruitsArray } from "../../redux/action";
 
-const Start = ({ setGrid, setMonsterIndex, setFruitsArray }) => {
+const Start = ({ setGrid, setMonsterIndex, setFruitsArray, won, start }) => {
   const button = useRef();
   const history = useHistory();
   const [error, setError] = useState(true);
@@ -72,12 +72,35 @@ const Start = ({ setGrid, setMonsterIndex, setFruitsArray }) => {
           <div className="character">
             <img src={character} alt="Character" />
           </div>
-          <h3>Greedy Hunter</h3>
+
+          {start ? (
+            <h3> Greedy Hunter</h3>
+          ) : won ? (
+            <h3>Bravo</h3>
+          ) : (
+            <h3>Game Over!</h3>
+          )}
+
           <div className="instruction">
-            <p>
-              The aim is to eat all the food in record time <br />
-              Configure your game grid below 👇🏼{" "}
-            </p>
+            {start ? (
+              <p>
+                The aim is to eat all the food in record time <br />
+                Configure your game grid below 👇🏼{" "}
+              </p>
+            ) : won ? (
+              <p>
+                Time Spent: <span>98 seconds</span>
+              </p>
+            ) : (
+              <>
+                <p>
+                  Total Food: <span>7/10</span>
+                </p>
+                <p>
+                  Time Spent: <span>98 seconds</span>
+                </p>
+              </>
+            )}
           </div>
           <div className="select">
             <p>Game Grid</p>
@@ -107,9 +130,13 @@ const Start = ({ setGrid, setMonsterIndex, setFruitsArray }) => {
     </div>
   );
 };
+const mapStateToProps = (state) => ({
+  start: state.start,
+  won: state.won,
+});
 const mapDispatchToProps = (dispatch) => ({
   setGrid: (number) => dispatch(setGrid(number)),
   setFruitsArray: (array) => dispatch(setFruitsArray(array)),
   setMonsterIndex: (number) => dispatch(setMonsterIndex(number)),
 });
-export default connect(null, mapDispatchToProps)(Start);
+export default connect(mapStateToProps, mapDispatchToProps)(Start);

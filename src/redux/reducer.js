@@ -6,6 +6,8 @@ const INITIAL_STATE = {
   movements: [],
   movesCount: -1,
   removeFruit: null,
+  start: true,
+  won: true,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
