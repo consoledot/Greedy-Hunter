@@ -10,12 +10,17 @@ const Grid = ({
   setMonsterIndex,
   movements,
   setRemoveFruit,
+  movesCount,
+  maxMoves,
 }) => (
   <div
     className="grid"
     onClick={() => {
       if (movements.includes(index)) {
         setMonsterIndex(index);
+        if (maxMoves === movesCount) {
+          console.log("yass");
+        }
         if (value) {
           setRemoveFruit(index);
         }
@@ -29,6 +34,8 @@ const Grid = ({
 
 const mapStateToProps = (state) => ({
   movements: state.movements,
+  maxMoves: state.maxMoves,
+  movesCount: state.movesCount,
 });
 
 const mapDispatchToProps = (dispatch) => ({

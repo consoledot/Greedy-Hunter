@@ -14,3 +14,7 @@ export const setRemoveFruit = (index) => ({
   type: "SET_REMOVE_FRUIT",
   payload: index,
 });
+export const setMaxMoves = (number) => ({
+  type: "SET_MAX_MOVES",
+  payload: number,
+});

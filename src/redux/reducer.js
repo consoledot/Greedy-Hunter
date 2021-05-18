@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   removeFruit: null,
   start: true,
   won: true,
+  maxMoves: null,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -33,6 +34,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         removeFruit: updateFruits(state.fruitsArray, action.payload),
+      };
+    case "SET_MAX_MOVES":
+      return {
+        ...state,
+        maxMoves: action.payload,
       };
     default:
       return state;
