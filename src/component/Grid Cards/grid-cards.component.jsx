@@ -1,8 +1,9 @@
 import "./grid-cards.style.scss";
 import Grid from "../Grid/grid.component";
-import { connect } from "react-redux";
+import {  useSelector } from "react-redux";
 
-const Grids = ({ grid, fruitsArray, monsterIndex }) => {
+const Grids = ({ grid}) => {
+  const { fruitsArray, monsterIndex } = useSelector(state => state)
   return (
     <div
       className="grids"
@@ -25,9 +26,6 @@ const Grids = ({ grid, fruitsArray, monsterIndex }) => {
     </div>
   );
 };
-const mapStateToProps = (state) => ({
-  monsterIndex: state.monsterIndex,
-  fruitsArray: state.fruitsArray,
-});
 
-export default connect(mapStateToProps)(Grids);
+
+export default Grids;

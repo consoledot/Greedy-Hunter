@@ -2,9 +2,11 @@ import "./game.style.scss";
 import { background } from "../../assets";
 import Grids from "../../component/Grid Cards/grid-cards.component";
 import { Life } from "../../assets";
-import { connect } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 
-const Game = ({ grid, movesCount, maxMoves }) => (
+const Game = () => {
+  const {grid, movesCount, maxMoves} = useSelector(state=> state)
+  return(
   <div
     className="game"
     style={{
@@ -26,10 +28,6 @@ const Game = ({ grid, movesCount, maxMoves }) => (
       </div>
     </div>
   </div>
-);
-const mapStateToProps = (state) => ({
-  grid: state.grid,
-  movesCount: state.movesCount,
-  maxMoves: state.maxMoves,
-});
-export default connect(mapStateToProps)(Game);
+)};
+
+export default Game;

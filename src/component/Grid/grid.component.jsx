@@ -1,28 +1,22 @@
 import "./grid.style.scss";
 import { Food } from "../../assets";
 import { Monster } from "../../assets/";
-import { connect } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import { setMonsterIndex, setRemoveFruit } from "../../redux/action";
-const Grid = ({
-  value,
-  monster,
-  index,
-  setMonsterIndex,
-  movements,
-  setRemoveFruit,
-  movesCount,
-  maxMoves,
-}) => (
+const Grid = ({value,monster,index,}) => {
+  const {movements, maxMoves, movesCount} = useSelector(state=> state)
+  const dispatch = useDispatch()
+  return(
   <div
     className="grid"
     onClick={() => {
       if (movements.includes(index)) {
-        setMonsterIndex(index);
+        dispatch(setMonsterIndex(index));
         if (maxMoves === movesCount) {
           console.log("yass");
         }
         if (value) {
-          setRemoveFruit(index);
+          dispatch(setRemoveFruit(index));
         }
       }
     }}
@@ -30,16 +24,7 @@ const Grid = ({
     {value && <Food />}
     {monster && <Monster className="monster" />}
   </div>
-);
+)};
 
-const mapStateToProps = (state) => ({
-  movements: state.movements,
-  maxMoves: state.maxMoves,
-  movesCount: state.movesCount,
-});
 
-const mapDispatchToProps = (dispatch) => ({
-  setMonsterIndex: (number) => dispatch(setMonsterIndex(number)),
-  setRemoveFruit: (number) => dispatch(setRemoveFruit(number)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Grid);
+export default Grid;

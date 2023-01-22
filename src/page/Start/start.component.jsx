@@ -1,8 +1,8 @@
 import "./start.style.scss";
 import { useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory,  } from "react-router-dom";
 import { dotted, character } from "../../assets";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setGrid,
   setMonsterIndex,
@@ -10,18 +10,13 @@ import {
   setMaxMoves,
 } from "../../redux/action";
 
-const Start = ({
-  setGrid,
-  setMonsterIndex,
-  setFruitsArray,
-  won,
-  start,
-  setMaxMoves,
-}) => {
+const Start = () => {
   const button = useRef();
   const history = useHistory();
   const [error, setError] = useState(true);
   const [grid, setGridNum] = useState("");
+  const {start, won} = useSelector(state=> state)
+  const dispatch = useDispatch()
 
   const handleGridUpdate = (e) => {
     const { value } = e.target;
@@ -68,10 +63,10 @@ const Start = ({
     }
     const monsterIndex = await setMonster(gridSquare, emptyArray);
 
-    setGrid(grid);
-    setMaxMoves(Math.ceil((grid * grid) / 2));
-    setFruitsArray(fruitsArray);
-    setMonsterIndex(monsterIndex);
+    dispatch(setGrid(grid));
+    dispatch(setMaxMoves(Math.ceil((grid * grid) / 2)));
+    dispatch(setFruitsArray(fruitsArray));
+    dispatch(setMonsterIndex(monsterIndex));
     history.push("/game");
   };
 
@@ -143,14 +138,5 @@ const Start = ({
     </div>
   );
 };
-const mapStateToProps = (state) => ({
-  start: state.start,
-  won: state.won,
-});
-const mapDispatchToProps = (dispatch) => ({
-  setGrid: (number) => dispatch(setGrid(number)),
-  setMaxMoves: (number) => dispatch(setMaxMoves(number)),
-  setFruitsArray: (array) => dispatch(setFruitsArray(array)),
-  setMonsterIndex: (number) => dispatch(setMonsterIndex(number)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Start);
+
+export default Start;
