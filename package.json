@@ -6,15 +6,19 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
     "logger": "^0.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-redux": "^8.0.0-beta.1",
+    "react-redux": "^7.2.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "sass": "^1.51.0",
+    "typescript": "^4.9.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -40,5 +44,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "a game",
+  "main": "index.ts",
+  "repository": "https://github.com/consoledot/Greedy-Hunter.git",
+  "author": "Abimbola Oladele <bimbooladele@outlook.com>",
+  "license": "MIT"
 }

@@ -2,7 +2,7 @@ import "./game.style.scss";
 import { background } from "../../assets";
 import Grids from "../../component/Grid Cards/grid-cards.component";
 import { Life } from "../../assets";
-import {  useDispatch, useSelector } from "react-redux";
+import {   useSelector } from "react-redux";
 
 const Game = () => {
   const {grid, movesCount, maxMoves} = useSelector(state=> state)
