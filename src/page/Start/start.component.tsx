@@ -110,13 +110,7 @@ const Start = () => {
             {" "}
             Grid must be between a value between 5 and 12
           </p>
-          <button
-            ref={button}
-            onClick={() => {
-              startGame();
-            }}
-            disabled={error}
-          >
+          <button ref={button} onClick={startGame} disabled={error}>
             Start game
           </button>
         </div>

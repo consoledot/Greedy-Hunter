@@ -7,11 +7,11 @@ const setMovements = (index: number, grid: number): number[] => {
   // bottom
   index + 1 > grid * (grid - 1)
     ? (array[2] = undefined)
-    : (array[2] = index + grid);
+    : (array[2] = +index + +grid);
   // left
   index % grid === 0 && index > 0
     ? (array[3] = undefined)
-    : (array[3] = index - 1);
+    : (array[3] = +index - 1);
 
   return array;
 };

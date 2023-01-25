@@ -1,11 +1,12 @@
+import { Action } from "redux";
 import { setMovements, updateFruits } from "./utils";
-interface StateProps {
+export interface StateProps {
   grid: number;
   monsterIndex: number;
   fruitsArray: number[];
   movements: number[];
   movesCount: number;
-  removeFruit: number[];
+  removeFruit: (number | undefined)[];
   start: boolean;
   won: boolean;
   maxMoves: number;
@@ -25,8 +26,11 @@ const INITIAL_STATE: StateProps = {
   won: false,
   maxMoves: 0,
 };
-
-const reducer = (state = INITIAL_STATE, action: ActionPayload) => {
+type Reducer<S> = <A extends Action>(state: S, action: A) => S;
+const reducer = (
+  state: StateProps = INITIAL_STATE,
+  action: ActionPayload
+): StateProps => {
   switch (action.type) {
     case "SET_GRID":
       return {
@@ -65,4 +69,5 @@ const reducer = (state = INITIAL_STATE, action: ActionPayload) => {
       return state;
   }
 };
+
 export default reducer;
