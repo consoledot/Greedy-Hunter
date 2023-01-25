@@ -5,4 +5,4 @@ const updateFruits = (array: (number | undefined)[], index: number) => {
   return array;
 };
 
-export { setMovements, updateFruits };
+export { updateFruits };
