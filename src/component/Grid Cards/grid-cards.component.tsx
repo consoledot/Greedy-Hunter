@@ -1,9 +1,11 @@
 import "./grid-cards.style.scss";
 import Grid from "../Grid/grid.component";
-import {  useSelector } from "react-redux";
+import { useSelector, RootStateOrAny } from "react-redux";
 
-const Grids = ({ grid}) => {
-  const { fruitsArray, monsterIndex } = useSelector(state => state)
+const Grids = ({ grid }: { grid: number }) => {
+  const { fruitsArray, monsterIndex } = useSelector(
+    (state: RootStateOrAny) => state
+  );
   return (
     <div
       className="grids"
@@ -26,6 +28,5 @@ const Grids = ({ grid}) => {
     </div>
   );
 };
-
 
 export default Grids;

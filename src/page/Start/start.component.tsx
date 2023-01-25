@@ -1,24 +1,25 @@
 import "./start.style.scss";
-import { useState, useRef } from "react";
-import { useHistory,  } from "react-router-dom";
+import { useState, useRef, MutableRefObject } from "react";
+import { useHistory } from "react-router-dom";
 import { dotted, character } from "../../assets";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import {
   setGrid,
   setMonsterIndex,
   setFruitsArray,
   setMaxMoves,
 } from "../../redux/action";
+import { initializeMonster, generateRandomNumber } from "../../utils";
 
 const Start = () => {
-  const button = useRef();
+  const button = useRef() as MutableRefObject<HTMLButtonElement>;
   const history = useHistory();
   const [error, setError] = useState(true);
-  const [grid, setGridNum] = useState("");
-  const {start, won} = useSelector(state=> state)
-  const dispatch = useDispatch()
+  const [grid, setGridNum] = useState<number>(0);
+  const { start, won } = useSelector((state: RootStateOrAny) => state);
+  const dispatch = useDispatch();
 
-  const handleGridUpdate = (e) => {
+  const handleGridUpdate = (e: any) => {
     const { value } = e.target;
     if (value >= 5 && value <= 12) {
       setError(false);
@@ -33,26 +34,11 @@ const Start = () => {
 
   //Game utilities
   const startGame = async () => {
-    let randomNumber = null;
+    let randomNumber: number = 0;
     const gridSquare = grid * grid;
     const fruitsArray = new Array(gridSquare);
-    function generateRandomNumber(num, array, prev) {
-      const random = Math.floor(Math.random() * num);
-      if (random !== prev) {
-        prev = random;
-        return (array[random] = 1);
-      }
-      return generateRandomNumber(num, array, prev);
-    }
-    const setMonster = (num, array) => {
-      const random = Math.floor(Math.random() * num);
-      if (array.includes(random)) {
-        return random;
-      }
-      return setMonster(num, array);
-    };
     for (let i = 0; i < grid; i++) {
-      await generateRandomNumber(gridSquare, fruitsArray, randomNumber);
+      generateRandomNumber(gridSquare, fruitsArray, randomNumber);
     }
     const list = fruitsArray.entries();
     const emptyArray = [];
@@ -61,12 +47,13 @@ const Start = () => {
         emptyArray.push(li[0]);
       }
     }
-    const monsterIndex = await setMonster(gridSquare, emptyArray);
+    const monsterIndex = await initializeMonster(gridSquare, emptyArray);
 
     dispatch(setGrid(grid));
     dispatch(setMaxMoves(Math.ceil((grid * grid) / 2)));
     dispatch(setFruitsArray(fruitsArray));
     dispatch(setMonsterIndex(monsterIndex));
+
     history.push("/game");
   };
 
@@ -128,7 +115,7 @@ const Start = () => {
             onClick={() => {
               startGame();
             }}
-            disabled={error ? true : false}
+            disabled={error}
           >
             Start game
           </button>

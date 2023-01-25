@@ -1,17 +1,32 @@
 import { setMovements, updateFruits } from "./utils";
-const INITIAL_STATE = {
-  grid: null,
-  monsterIndex: null,
-  fruitsArray: null,
+interface StateProps {
+  grid: number;
+  monsterIndex: number;
+  fruitsArray: number[];
+  movements: number[];
+  movesCount: number;
+  removeFruit: number[];
+  start: boolean;
+  won: boolean;
+  maxMoves: number;
+}
+interface ActionPayload {
+  type: string;
+  payload: any;
+}
+const INITIAL_STATE: StateProps = {
+  grid: 0,
+  monsterIndex: 0,
+  fruitsArray: [],
   movements: [],
   movesCount: -1,
-  removeFruit: null,
-  start: true,
-  won: true,
-  maxMoves: null,
+  removeFruit: [],
+  start: false,
+  won: false,
+  maxMoves: 0,
 };
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = (state = INITIAL_STATE, action: ActionPayload) => {
   switch (action.type) {
     case "SET_GRID":
       return {
@@ -39,6 +54,12 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         maxMoves: action.payload,
+      };
+    case "SET_RESULT":
+      return {
+        ...state,
+        start: false,
+        won: action.payload,
       };
     default:
       return state;
