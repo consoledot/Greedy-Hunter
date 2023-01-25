@@ -1,5 +1,6 @@
 import { Action } from "redux";
-import { setMovements, updateFruits } from "./utils";
+import { updateFruits } from "./utils";
+import { getMovements } from "../utils";
 export interface StateProps {
   grid: number;
   monsterIndex: number;
@@ -41,7 +42,7 @@ const reducer = (
       return {
         ...state,
         monsterIndex: action.payload,
-        movements: setMovements(action.payload, state.grid),
+        movements: getMovements(action.payload, state.grid),
         movesCount: state.movesCount + 1,
       };
     case "SET_FRUITS":

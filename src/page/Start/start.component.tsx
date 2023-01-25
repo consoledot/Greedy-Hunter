@@ -10,6 +10,7 @@ import {
   setMaxMoves,
 } from "../../redux/action";
 import { initializeMonster, generateRandomNumber } from "../../utils";
+import useGame from "../../hooks/useGame";
 
 const Start = () => {
   const button = useRef() as MutableRefObject<HTMLButtonElement>;
@@ -18,6 +19,9 @@ const Start = () => {
   const [grid, setGridNum] = useState<number>(0);
   const { start, won } = useSelector((state: RootStateOrAny) => state);
   const dispatch = useDispatch();
+  const {fruitsArray, monsterIndex} = useGame(grid)
+
+  console.log(fruitsArray, monsterIndex)
 
   const handleGridUpdate = (e: any) => {
     const { value } = e.target;
@@ -47,7 +51,7 @@ const Start = () => {
         emptyArray.push(li[0]);
       }
     }
-    const monsterIndex = await initializeMonster(gridSquare, emptyArray);
+    const monsterIndex = initializeMonster(gridSquare, emptyArray);
 
     dispatch(setGrid(grid));
     dispatch(setMaxMoves(Math.ceil((grid * grid) / 2)));
